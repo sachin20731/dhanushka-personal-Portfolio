@@ -205,26 +205,26 @@ export default function Certificates() {
   const certificates = [
     {
       id: 1,
-      title: "Full-Stack Web Development",
-      issuer: "Meta / Coursera",
-      date: "2024",
+      title: "Cloud Computing for Absolute Beginners",
+      issuer: "CoDeKu DevOps Academy",
+      date: "2025",
       description: "Mastered React, Node.js, databases, and REST APIs.",
       credentialUrl: "#",
       image: "/cert-placeholder.png",
     },
     {
       id: 2,
-      title: "Spring Boot & Microservices",
-      issuer: "Udemy",
-      date: "2025",
+      title: "Learning React Native",
+      issuer: "LinkedIn Learning",
+      date: "2023",
       description:
-        "Built scalable microservices with Spring Cloud, Docker, and Kubernetes.",
-      credentialUrl: "#",
+        "",
+      credentialUrl: "https://www.linkedin.com/learning/certificates/990d873c707d5928d120cc6285bca7c2c14cc6103c303150316227a615b9d9ee",
     },
     {
       id: 3,
-      title: "AWS Certified Cloud Practitioner",
-      issuer: "Amazon Web Services",
+      title: "AWS Cloud computing  Foundation",
+      issuer: "University Of Moratuwa",
       date: "2025",
       description:
         "Cloud concepts, security, pricing, and architecture.",
@@ -232,12 +232,12 @@ export default function Certificates() {
     },
     {
       id: 4,
-      title: "JavaScript Algorithms & Data Structures",
-      issuer: "freeCodeCamp",
-      date: "2023",
+      title: "Introduction to Front-End Development",
+      issuer: "Meta / Coursera",
+      date: "2025",
       description:
-        "300+ hours of coding challenges and algorithm design.",
-      credentialUrl: "#",
+        "Learned HTML, CSS, JavaScript, and React to build interactive web interfaces.",
+      credentialUrl: "https://www.coursera.org/account/accomplishments/verify/SCANL2CTZ2B3",
     },
   ];
 
