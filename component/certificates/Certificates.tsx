@@ -436,7 +436,7 @@ export default function Certificates() {
           {/* CTA */}
           <div className="flex justify-center mt-12">
             <a
-              href="#"
+              href=""
               className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#6A63AF]/40 text-sm text-[#6A63AF] hover:bg-[#6A63AF] hover:text-white transition-all duration-300"
             >
               <Link2 size={14} />
