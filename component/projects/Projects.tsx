@@ -1,355 +1,215 @@
-// export default function Projects() {
-//     return (
-//         <section id="projects" className="relative z-10 w-full min-h-screen py-24 px-8 sm:px-16 lg:px-24 flex flex-col justify-center bg-[#1a191d]">
-//             <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 tracking-tight">Featured <span className="text-zinc-600">Projects</span></h2>
-//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//                 {[1, 2, 3].map((i) => (
-//                     <div key={i} className="aspect-video bg-[#25242b] rounded-xl border border-white/5 hover:border-white/20 transition-all flex items-center justify-center cursor-pointer group hover:scale-105 duration-500">
-//                         <span className="text-zinc-500 group-hover:text-white">Project {i} Screenshot</span>
-//                     </div>
-//                 ))}
-//             </div>
-//         </section>
-//     );
-// }
+"use client";
 
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { CodeXml, ExternalLink } from "lucide-react";
+import SectionHeading from "../ui/SectionHeading";
+import SpotlightCard from "../ui/SpotlightCard";
+import { EASE, Reveal } from "../motion/Reveal";
 
-// import { ExternalLink } from 'lucide-react';
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  github?: string;
+  live?: string;
+  featured: boolean;
+};
 
-// export default function Projects() {
-//   const projects = [
-//     {
-//       id: 1,
-//       title: "Nebula AI Dashboard",
-//       description: "Real-time analytics dashboard for AI model performance metrics, featuring interactive charts and model comparison tools.",
-//       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format",
-//       tags: ["React", "D3.js", "TensorFlow.js", "Tailwind"],
-//       github: "https://github.com/example/nebula-ai",
-//       live: "https://nebula-ai-demo.vercel.app",
-//       featured: true
-//     },
-//     {
-//       id: 2,
-//       title: "Artisan Market",
-//       description: "E-commerce platform connecting local artisans with global buyers, featuring secure payments and inventory management.",
-//       image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&auto=format",
-//       tags: ["Next.js", "Stripe", "PostgreSQL", "Tailwind"],
-//       github: "https://github.com/example/artisan-market",
-//       live: "https://artisan-market-demo.vercel.app",
-//       featured: false
-//     },
-//     {
-//       id: 3,
-//       title: "FlowState Task Manager",
-//       description: "Minimalist productivity app with Pomodoro timer, task prioritization, and cross-device synchronization.",
-//       image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format",
-//       tags: ["Vue", "Vuex", "Firebase", "Tailwind"],
-//       github: "https://github.com/example/flowstate",
-//       live: "https://flowstate-app.vercel.app",
-//       featured: false
-//     },
-//     {
-//       id: 4,
-//       title: "WeatherVane",
-//       description: "Beautiful weather application with animated backgrounds, 7-day forecasts, and interactive radar maps.",
-//       image: "https://images.unsplash.com/photo-1592210454359-9046e3d163a4?w=800&auto=format",
-//       tags: ["React", "OpenWeather API", "Framer Motion", "Chart.js"],
-//       github: "https://github.com/example/weathervane",
-//       live: "https://weathervane-demo.vercel.app",
-//       featured: false
-//     },
-//     {
-//       id: 5,
-//       title: "CodeCollab",
-//       description: "Real-time collaborative code editor with syntax highlighting, video chat, and version control integration.",
-//       image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18a5?w=800&auto=format",
-//       tags: ["WebSocket", "Monaco Editor", "Express", "MongoDB"],
-//       github: "https://github.com/example/codecollab",
-//       live: "https://codecollab-demo.vercel.app",
-//       featured: false
-//     },
-//     {
-//       id: 6,
-//       title: "MediTrack",
-//       description: "Healthcare appointment scheduling system with patient records, prescription management, and telemedicine integration.",
-//       image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format",
-//       tags: ["React Native", "Node.js", "PostgreSQL", "Twilio"],
-//       github: "https://github.com/example/meditrack",
-//       live: "https://meditrack-demo.vercel.app",
-//       featured: false
-//     }
-//   ];
+const PROJECTS: Project[] = [
+  {
+    id: 1,
+    title: "MPC Promo system",
+    description:
+      "MPC Promo System is a digital promotional campaign management platform that generates unique promo codes and printable promo cards for customers. Users can submit these promo codes to the company for validation, and after successful verification, rewards are provided through mobile reloads or direct bank transfers based on the customer’s preference. The system also includes secure code validation, campaign tracking, user management, and real-time reporting features to ensure an efficient and reliable promotional process.",
+    image: "/MPC.png",
+    tags: ["React", "MongoDb", "express", "Tailwind"],
+    github: "https://github.com/Mishan20/Promo_system_client",
+    featured: true,
+  },
+  {
+    id: 2,
+    title: "Aqua Engineering & Constructions (Pvt)Ltd Official website",
+    description:
+      "E-commerce platform connecting local artisans with global buyers, featuring secure payments and inventory management.",
+    image: "/aqua.png",
+    tags: ["Wordpress", "PHP", "Elementor", "Custom CSS", "JS"],
+    live: "https://www.aquaengineering.lk",
+    featured: false,
+  },
+  {
+    id: 3,
+    title: "BuildTrackPro - Construction Project Management Software (Ongoing)",
+    description: "Minimalist productivity app with Pomodoro timer, task prioritization, and cross-device synchronization.",
+    image: "/buildtrackpro.png",
+    tags: ["Vue", "Vuex", "Firebase", "Tailwind"],
+    github: "https://github.com/example/flowstate",
+    live: "https://flowstate-app.vercel.app",
+    featured: false,
+  },
+  {
+    id: 4,
+    title: "CS Engineering and Service Website",
+    description: "Beautiful weather application with animated backgrounds, 7-day forecasts, and interactive radar maps.",
+    image: "/cs-engineering.png",
+    tags: ["React", "OpenWeather API", "Framer Motion", "Chart.js"],
+    github: "https://github.com/VerlixTech/VTE00086---CS-Engineering",
+    live: "https://weathervane-demo.vercel.app",
+    featured: false,
+  },
+  {
+    id: 5,
+    title: "Portfolio Website",
+    description:
+      "This is the newest portfolio website of mine, built using Next.js and Tailwind CSS. It features a modern design, smooth animations, and responsive layout to showcase my projects and skills effectively.",
+    image: "/portfolio.png",
+    tags: ["WebSocket", "Monaco Editor", "Express", "MongoDB"],
+    github: "https://github.com/example/codecollab",
+    live: "https://dhanushka-personal-portfolio.vercel.app/",
+    featured: false,
+  },
+  {
+    id: 6,
+    title: "Autism Diaganosis system",
+    description:
+      "Autism Diagnosis Prediction System is designed to assist in the early identification of autism spectrum disorder (ASD) in children below the age of three. The system analyzes behavioral patterns and developmental indicators to provide a predictive assessment, enabling timely intervention and support.",
+    image: "/Autism.webp",
+    tags: ["React Native", "Node.js", "MySql", "Java Script", "Pytorch", "Express", "Tensorflow"],
+    github: "https://github.com/example/meditrack",
+    live: "https://meditrack-demo.vercel.app",
+    featured: false,
+  },
+];
 
-//   return (
-//     <section id="projects" className="relative z-10 w-full min-h-screen py-24 px-8 sm:px-16 lg:px-24 bg-[#1a191d]">
-//       <div className="max-w-7xl mx-auto">
-//         <h2 className="text-4xl md:text-5xl font-bold text-[#6A63AF]  mb-4 tracking-tight">
-//           Featured <span className="text-zinc-600">Projects</span>
-//         </h2>
-//         <p className="text-zinc-400 mb-12 max-w-2xl">
-//           Here are some of my recent works. Each project represents unique challenges and creative solutions.
-//         </p>
-        
-//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//           {projects.map((project) => (
-//             <div
-//               key={project.id}
-//               className="group bg-[#25242b] rounded-xl overflow-hidden border border-white/5 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl"
-//             >
-//               {/* Project Image */}
-//               <div className="relative aspect-video overflow-hidden">
-//                 <img
-//                   src={project.image}
-//                   alt={project.title}
-//                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-//                 />
-//                 {project.featured && (
-//                   <div className="absolute top-3 right-3 bg-purple-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
-//                     Featured
-//                   </div>
-//                 )}
-//               </div>
-              
-//               {/* Project Content */}
-//               <div className="p-6">
-//                 <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
-//                   {project.title}
-//                 </h3>
-//                 <p className="text-zinc-400 text-sm mb-4 line-clamp-2">
-//                   {project.description}
-//                 </p>
-                
-//                 {/* Tech Tags */}
-//                 <div className="flex flex-wrap gap-2 mb-4">
-//                   {project.tags.map((tag) => (
-//                     <span
-//                       key={tag}
-//                       className="text-xs px-2 py-1 rounded-full bg-zinc-800/50 text-zinc-300 border border-white/5"
-//                     >
-//                       {tag}
-//                     </span>
-//                   ))}
-//                 </div>
-                
-//                 {/* Action Buttons */}
-//                 <div className="flex gap-3 pt-2 border-t border-white/5">
-//                   <a
-//                     href={project.github}
-//                     target="_blank"
-//                     rel="noopener noreferrer"
-//                     className="flex items-center gap-1 text-zinc-400 hover:text-white transition-colors text-sm group/link"
-//                   >
-//                     <ExternalLink size={12} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
-//                     <span>Code</span>
-//                     <ExternalLink size={12} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
-//                   </a>
-//                   <a
-//                     href={project.live}
-//                     target="_blank"
-//                     rel="noopener noreferrer"
-//                     className="flex items-center gap-1 text-zinc-400 hover:text-white transition-colors text-sm group/link"
-//                   >
-//                     <ExternalLink size={14} />
-//                     <span>Live Demo</span>
-//                     <ExternalLink size={12} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
-//                   </a>
-//                 </div>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
+const PARTNERS = [
+  { name: "Madhushika Paints and Chemical(Pvt) Ltd", logo: "/MPC-logo.png", url: "https://cybermas.com" },
+  { name: "Aquaengineering & Construction (Pvt)Ltd", logo: "/aqua-logo.png", url: "https://verlixtech.com" },
+];
 
+function ProjectCard({ project }: { project: Project }) {
+  return (
+    <SpotlightCard className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-surface/60 transition-[transform,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:border-iris/40 hover:shadow-[0_30px_60px_-30px_rgba(106,99,175,0.6)]">
+      <div className="relative aspect-video overflow-hidden">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+          className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07]"
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-surface via-surface/5 to-transparent opacity-90" />
+        {project.featured && (
+          <span className="absolute left-4 top-4 rounded-full bg-iris px-3 py-1 text-xs font-medium text-white shadow-lg shadow-black/30">
+            Featured
+          </span>
+        )}
+      </div>
 
-import { ExternalLink } from 'lucide-react';
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="text-lg font-semibold leading-snug text-mist transition-colors duration-300 group-hover:text-lilac">
+          {project.title}
+        </h3>
+        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted">{project.description}</p>
+
+        <ul className="mt-5 flex flex-wrap gap-1.5">
+          {project.tags.map((tag) => (
+            <li key={tag} className="rounded-full border border-white/[0.07] bg-white/[0.04] px-2.5 py-1 text-xs text-mist/75">
+              {tag}
+            </li>
+          ))}
+        </ul>
+
+        {(project.github || project.live) && (
+          <div className="mt-auto pt-6">
+          <div className="flex gap-5 border-t border-white/[0.06] pt-5">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/link inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-mist"
+              >
+                <CodeXml size={15} />
+                <span>Code</span>
+              </a>
+            )}
+            {project.live && (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/link inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-mist"
+              >
+                <ExternalLink size={15} className="transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
+                <span>Live demo</span>
+              </a>
+            )}
+          </div>
+          </div>
+        )}
+      </div>
+    </SpotlightCard>
+  );
+}
 
 export default function Projects() {
-  const projects = [
-    {
-      id: 1,
-      title: "MPC Promo system",
-      description: "MPC Promo System is a digital promotional campaign management platform that generates unique promo codes and printable promo cards for customers. Users can submit these promo codes to the company for validation, and after successful verification, rewards are provided through mobile reloads or direct bank transfers based on the customer’s preference. The system also includes secure code validation, campaign tracking, user management, and real-time reporting features to ensure an efficient and reliable promotional process.",
-      image: "/MPC.png",
-      tags: ["React", "MongoDb", "express", "Tailwind"],
-      github: "https://github.com/Mishan20/Promo_system_client",
-      
-      featured: true
-    },
-    {
-      id: 2,
-      title: "Aqua Engineering & Constructions (Pvt)Ltd Official website",
-      description: "E-commerce platform connecting local artisans with global buyers, featuring secure payments and inventory management.",
-      image: "/aqua.png",
-      tags: ["Wordpress","PHP","Elementor","Custom CSS","JS"],
-      
-      live: "https://www.aquaengineering.lk",
-      featured: false
-    },
-    {
-      id: 3,
-      title: "BuildTrackPro - Construction Project Management Software (Ongoing)",
-      description: "Minimalist productivity app with Pomodoro timer, task prioritization, and cross-device synchronization.",
-      image: "/buildtrackpro.png",
-      tags: ["Vue", "Vuex", "Firebase", "Tailwind"],
-      github: "https://github.com/example/flowstate",
-      live: "https://flowstate-app.vercel.app",
-      featured: false
-    },
-    {
-      id: 4,
-      title: "CS Engineering and Service Website",
-      description: "Beautiful weather application with animated backgrounds, 7-day forecasts, and interactive radar maps.",
-      image: "/cs-engineering.png",
-      tags: ["React", "OpenWeather API", "Framer Motion", "Chart.js"],
-      github: "https://github.com/VerlixTech/VTE00086---CS-Engineering",
-      live: "https://weathervane-demo.vercel.app",
-      featured: false
-    },
-    {
-      id: 5,
-      title: "Portfolio Website",
-      description: "This is the newest portfolio website of mine, built using Next.js and Tailwind CSS. It features a modern design, smooth animations, and responsive layout to showcase my projects and skills effectively.",
-      image: "/portfolio.png",
-      tags: ["WebSocket", "Monaco Editor", "Express", "MongoDB"],
-      github: "https://github.com/example/codecollab",
-      live: "https://dhanushka-personal-portfolio.vercel.app/",
-      featured: false
-    },
-    {
-      id: 6,
-      title: "Autism Diaganosis system",
-      description: " Autism Diagnosis Prediction System is designed to assist in the early identification of autism spectrum disorder (ASD) in children below the age of three. The system analyzes behavioral patterns and developmental indicators to provide a predictive assessment, enabling timely intervention and support.",
-      image: "/Autism.webp",
-      tags: ["React Native", "Node.js", "MySql", "Java Script","Pytorch","Express","Tensorflow"],
-      github: "https://github.com/example/meditrack",
-      live: "https://meditrack-demo.vercel.app",
-      featured: false
-    }
-  ];
-
-  // Partner companies data – replace with your actual logos and names
-  const partners = [
-    { name: "Madhushika Paints and Chemical(Pvt) Ltd", logo: "/MPC-logo.png", url: "https://cybermas.com" },
-    { name: "Aquaengineering & Construction (Pvt)Ltd", logo: "/aqua-logo.png", url: "https://verlixtech.com" },
-    
-  ];
-
   return (
-    <section id="projects" className="relative z-10 w-full min-h-screen py-24 px-8 sm:px-16 lg:px-24 bg-[#1a191d]">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-[#6A63AF] mb-4 tracking-tight">
-          Featured <span className="text-zinc-600">Projects</span>
-        </h2>
-        <p className="text-zinc-400 mb-12 max-w-2xl">
-          Here are some of my recent works. Each project represents unique challenges and creative solutions.
-        </p>
-        
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="group bg-[#25242b] rounded-xl overflow-hidden border border-white/5 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl"
-            >
-              {/* Project Image */}
-              <div className="relative aspect-video overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                {project.featured && (
-                  <div className="absolute top-3 right-3 bg-purple-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
-                    Featured
-                  </div>
-                )}
-              </div>
-              
-              {/* Project Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-zinc-400 text-sm mb-4 line-clamp-2">
-                  {project.description}
-                </p>
-                
-                {/* Tech Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-2 py-1 rounded-full bg-zinc-800/50 text-zinc-300 border border-white/5"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                {/* Action Buttons */}
-                <div className="flex gap-3 pt-2 border-t border-white/5">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-zinc-400 hover:text-white transition-colors text-sm group/link"
-                  >
-                    <ExternalLink size={12} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
-                    <span>Code</span>
-                    <ExternalLink size={12} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
-                  </a>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-zinc-400 hover:text-white transition-colors text-sm group/link"
-                  >
-                    <ExternalLink size={14} />
-                    <span>Live Demo</span>
-                    <ExternalLink size={12} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
-                  </a>
-                </div>
-              </div>
-            </div>
+    <div className="relative bg-plum px-5 py-24 md:px-12 md:py-32 lg:px-16">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          title="Featured projects"
+          intro="Here are some of my recent works. Each project represents unique challenges and creative solutions."
+        />
+
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {PROJECTS.map((project, i) => (
+            <Reveal key={project.id} delay={(i % 3) * 0.1} className="h-full">
+              <ProjectCard project={project} />
+            </Reveal>
           ))}
         </div>
 
-        {/* ========== PARTNER COMPANIES SECTION ========== */}
-        <div className="mt-24 pt-12 border-t border-white/10">
-          <h3 className="text-2xl md:text-3xl font-semibold text-center text-white mb-2">
-            Trusted By <span className="text-[#6A63AF]">Partner Companies</span>
-          </h3>
-          <p className="text-center text-zinc-400 mb-12 max-w-2xl mx-auto">
-            I've had the privilege of collaborating with these great organizations.
-          </p>
-          
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16">
-            {partners.map((partner, idx) => (
-              <a
-                key={idx}
+        {/* Partners */}
+        <div className="mt-28 border-t border-white/[0.06] pt-16">
+          <Reveal>
+            <h3 className="text-center text-2xl font-semibold tracking-tight text-mist md:text-3xl">
+              Trusted by partner companies
+            </h3>
+            <p className="mx-auto mt-3 max-w-2xl text-center text-muted">
+              I&apos;ve had the privilege of collaborating with these great organizations.
+            </p>
+          </Reveal>
+
+          <div className="mt-12 flex flex-wrap items-start justify-center gap-12 md:gap-20">
+            {PARTNERS.map((partner, i) => (
+              <motion.a
+                key={partner.name}
                 href={partner.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col items-center gap-3 transition-all duration-300 hover:scale-110"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.8, delay: i * 0.12, ease: EASE }}
+                className="group flex max-w-[12rem] flex-col items-center gap-4 text-center"
               >
-                <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-[#25242b] border border-white/10 group-hover:border-[#6A63AF]/50 flex items-center justify-center p-4 transition-all duration-300 shadow-lg group-hover:shadow-purple-500/20">
-                  <img
+                <span className="grid h-28 w-28 place-items-center rounded-full border border-white/10 bg-surface p-5 shadow-lg transition-all duration-500 group-hover:-translate-y-1.5 group-hover:border-iris/50 group-hover:shadow-[0_20px_40px_-15px_rgba(106,99,175,0.6)]">
+                  <Image
                     src={partner.logo}
                     alt={partner.name}
-                    className="w-full h-full object-contain filter brightness-0 invert opacity-80 group-hover:opacity-100 transition-all duration-300"
+                    width={80}
+                    height={80}
+                    className="h-full w-full object-contain opacity-80 brightness-0 invert transition-opacity duration-300 group-hover:opacity-100"
                   />
-                </div>
-                <span className="text-zinc-400 text-sm font-medium group-hover:text-[#6A63AF] transition-colors">
-                  {partner.name}
                 </span>
-              </a>
+                <span className="text-sm font-medium text-muted transition-colors group-hover:text-lilac">{partner.name}</span>
+              </motion.a>
             ))}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

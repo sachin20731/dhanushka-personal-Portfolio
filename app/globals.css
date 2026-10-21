@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------
+   Design tokens
+   ink      – page base           plum    – alternate section base
+   surface  – cards / panels      iris    – brand purple (#6A63AF)
+   lilac    – light accent        mist    – primary text
+   muted    – secondary text
+---------------------------------------------------------------- */
 :root {
-  --background: #161616;
-  --foreground: #ededed;
+  --background: #141317;
+  --foreground: #e9e7f0;
 }
 
 @theme inline {
@@ -12,105 +19,243 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@theme {
+  --color-ink: #141317;
+  --color-plum: #1a1820;
+  --color-surface: #222029;
+  --color-iris: #6a63af;
+  --color-lilac: #a49bea;
+  --color-mist: #e9e7f0;
+  --color-muted: #9b97aa;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
+  text-rendering: optimizeLegibility;
 }
 
+::selection {
+  background: rgb(106 99 175 / 0.45);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid #a49bea;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Thin, on-brand scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3b3750 transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #3b3750;
+  border-radius: 999px;
+  border: 3px solid var(--background);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6a63af;
+}
+
+/* ---------------------------------------------------------------
+   Utilities
+---------------------------------------------------------------- */
 @layer utilities {
   .animate-float {
-    animation: float 6s ease-in-out infinite;
+    animation: float 7s ease-in-out infinite;
   }
   .animate-float-delayed {
-    animation: float 6s ease-in-out 3s infinite;
+    animation: float 7s ease-in-out 3s infinite;
   }
   .animate-float-slow {
-    animation: float 8s ease-in-out 1s infinite;
+    animation: float 9s ease-in-out 1s infinite;
+  }
+  .animate-float-soft {
+    animation: floatSoft 6s ease-in-out infinite;
+  }
+  .animate-drift {
+    animation: drift 22s ease-in-out infinite alternate;
+  }
+  .animate-drift-reverse {
+    animation: drift 26s ease-in-out infinite alternate-reverse;
+  }
+  .animate-glow {
+    animation: glow 6s ease-in-out infinite;
+  }
+
+  .text-gradient {
+    background: linear-gradient(100deg, #f3f1fa 15%, #a49bea 55%, #6a63af 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(rgb(106 99 175 / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(106 99 175 / 0.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
   }
 }
 
 @keyframes float {
-  0% {
-    transform: translateY(0px) rotate(0deg);
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
   50% {
-    transform: translateY(-20px) rotate(2deg);
-  }
-  100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translate3d(0, -18px, 0) rotate(2deg);
   }
 }
 
-
-
-
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
+@keyframes floatSoft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+    transform: translate3d(0, -8px, 0);
   }
 }
 
-@keyframes floatParticle {
+@keyframes drift {
   0% {
-    transform: translateY(0px) translateX(0px);
-    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(1);
   }
-  10% {
-    opacity: 0.6;
-  }
-  90% {
-    opacity: 0.4;
+  50% {
+    transform: translate3d(6%, -4%, 0) scale(1.08);
   }
   100% {
-    transform: translateY(-100px) translateX(40px);
-    opacity: 0;
+    transform: translate3d(-4%, 6%, 0) scale(0.96);
   }
 }
 
-@keyframes slowDrift {
-  0% {
-    transform: translate(0, 0);
-  }
+@keyframes glow {
+  0%,
   100% {
-    transform: translate(20px, 20px);
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.85;
   }
 }
 
-.animated-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  background: linear-gradient(135deg, #1a191d 0%, #2a2533 50%, #1a191d 100%);
-  background-size: 200% 200%;
-  animation: gradientShift 15s ease infinite;
+/* ---------------------------------------------------------------
+   Spotlight card – a soft light that follows the cursor
+---------------------------------------------------------------- */
+.spotlight {
+  position: relative;
+  isolation: isolate;
 }
-
-.particle {
-  position: absolute;
-  background: rgba(106, 99, 175, 0.2);
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(4px);
-  animation: floatParticle 12s infinite linear;
-}
-
-.grid-pattern {
+.spotlight::before,
+.spotlight::after {
+  content: "";
   position: absolute;
   inset: 0;
-  background-image: 
-    linear-gradient(rgba(106, 99, 175, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(106, 99, 175, 0.08) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: slowDrift 30s infinite alternate ease-in-out;
+  border-radius: inherit;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.spotlight::before {
+  z-index: -1;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(164 155 234 / 0.12),
+    transparent 45%
+  );
+}
+.spotlight::after {
+  z-index: 2;
+  padding: 1px;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(164 155 234 / 0.75),
+    transparent 60%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.spotlight:hover::before,
+.spotlight:hover::after {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------
+   Comet border – a light that travels around a panel's edge
+---------------------------------------------------------------- */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.comet-border {
+  position: relative;
+  isolation: isolate;
+}
+.comet-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background:
+    conic-gradient(
+      from var(--angle),
+      transparent 0deg 290deg,
+      rgb(164 155 234 / 0.95) 345deg,
+      transparent 360deg
+    ),
+    linear-gradient(rgb(106 99 175 / 0.35), rgb(106 99 175 / 0.35));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin-angle 7s linear infinite;
+}
+
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Respect people who prefer less motion
+---------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
